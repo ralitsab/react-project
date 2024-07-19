@@ -1,0 +1,25 @@
+.header {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 247 229 / var(--tw-bg-opacity));
+    transition-duration: .15s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    width: 100%;
+  }
+  
+  .header-left nav,
+  .header-right {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .header-left nav a,
+  .header-right a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .header-center .logo img {
+    max-height: 50px; /* Adjust based on your logo size */
+  }
