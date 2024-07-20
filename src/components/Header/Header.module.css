@@ -1,7 +1,8 @@
 .header {
     --tw-bg-opacity: 1;
-    background-color: rgb(255 247 229 / var(--tw-bg-opacity));
+  
     transition-duration: .15s;
+    background-color: rgb(255 247 229);
     transition-property: all;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     width: 100%;
@@ -19,6 +20,17 @@
     color: #333;
     font-weight: bold;
   }
+ 
+  .nav_link {
+    color: #1b330a;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0;
+    text-decoration-line: none;
+}
+
+
   
   .header-center .logo img {
     max-height: 50px; /* Adjust based on your logo size */
