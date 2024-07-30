@@ -43,15 +43,26 @@ export const loginUser = async (email, password) => {
 
 // Logout user
 export const logoutUser = async () => {
-  setLoading(true);
-  setError(null);
+  const auth = getAuth();
   try {
     await signOut(auth);
-    setUser(null);
-    setLoading(false);
   } catch (error) {
-    setError(error.message);
-    setLoading(false);
+    throw error;
+  }
+};
+
+export const getUserProfile = async (userId) => {
+  try {
+    const userProfileDoc = doc(db, "users", userId);
+    const userProfileSnap = await getDoc(userProfileDoc);
+    if (userProfileSnap.exists()) {
+      return userProfileSnap.data();
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user profile: ", error);
     throw error;
   }
 };
