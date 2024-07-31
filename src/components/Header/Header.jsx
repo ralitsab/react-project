@@ -1,10 +1,42 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faBasketShopping } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faBasketShopping,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
+import { useAuth } from "../../context/authProvider";
+import { logoutUser } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
+import LogoutModal from "./Logout/LogoutModal";
 export default function Header() {
+  const navigate = useNavigate();
+  const { currentUser, logout } = useAuth();
+
+  const [open, setOpen] = useState(false);
+  
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      logoutUser();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <header
       className={`${styles.header} justify-between header items-center p-4 shadow-md pl-20 pr-20`}
@@ -37,26 +69,33 @@ export default function Header() {
         </Link>
         <div className="flex space-x-6 flex-1 justify-end">
           <Link to="/account">
-          <a
-            href="#account"
-            className="text-gray-700 font-semibold flex items-center"
-          >
-            <FontAwesomeIcon
-              icon={faUser}
-              className="mr-2 text-[#14433D]"
-              style={{ height: "20px", width: "20px" }}
-            />
-          </a>
+              <FontAwesomeIcon
+                icon={faUser}
+                className="mr-2 text-[#14433D]"
+                style={{ height: "20px", width: "20px" }}
+              />
           </Link>
+          {currentUser && (
+            <>
+              <button onClick={handleOpen} className="flex items-center">
+                <FontAwesomeIcon
+                  icon={faSignOutAlt}
+                  className="mr-2 text-[#14433D]"
+                  style={{ height: "20px", width: "20px" }}
+                />
+              </button>
+              <LogoutModal open={open} handleClose={handleClose} handleLogout={handleLogout} />
+            </>
+          )}
           <a
-            href="#basket"
+            href="/cart"
             className="text-gray-700 font-semibold flex items-center"
           >
             <FontAwesomeIcon
               icon={faBasketShopping}
               className="mr-2 text-[#14433D]"
               style={{ height: "20px", width: "20px" }}
-            /> 
+            />
           </a>
         </div>
       </div>

@@ -27,16 +27,12 @@ const Footer = () => {
             <p className="text-gray-400">Email: contact@example.com</p>
             <div className="flex space-x-4 mt-4">
               <a href="#" className="text-gray-400 hover:text-white">
-                <FontAwesomeIcon icon />
               </a>
               <a href="#" className="text-gray-400 hover:text-white">
-                <FontAwesomeIcon icon />
               </a>
               <a href="#" className="text-gray-400 hover:text-white">
-                <FontAwesomeIcon icon />
               </a>
               <a href="#" className="text-gray-400 hover:text-white">
-                <FontAwesomeIcon icon />
               </a>
             </div>
           </div>

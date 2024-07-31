@@ -3,22 +3,28 @@ import styles from "../account.module.css";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../../services/authService";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "../../../hooks/useForm";
+
+
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const initialValues = { email: '', password: '' };
 
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
+  const login = async (values) => {
     try {
-      await loginUser(email, password);
-      navigate("/");
+      await loginUser(values.email, values.password);
+      navigate("/account");
     } catch (error) {
       console.log(error);
     }
   };
+
+
+  const { values, changeHandler, submitHandler } = useForm(initialValues, login);
+
+
 
 
   return (
@@ -27,7 +33,7 @@ export default function LoginForm() {
         <h2 className="antialiased m-0 p-0 font-display text-5xl md:text-6xl text-[#14433D] text-center font-bold">
           Login
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={submitHandler} className="space-y-6">
           <div>
             <label
               htmlFor="email"
@@ -39,8 +45,8 @@ export default function LoginForm() {
               type="email"
               id="email"
               name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={values.email}
+              onChange={changeHandler}
               required
               className="block w-full px-3 py-3 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
@@ -56,14 +62,14 @@ export default function LoginForm() {
               type="password"
               id="password"
               name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={values.password}
+              onChange={changeHandler}
               required
               className="block w-full px-3 py-3 mt-1 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <input
                 id="remember-me"
                 name="remember-me"
@@ -76,18 +82,11 @@ export default function LoginForm() {
               >
                 Remember me
               </label>
-            </div>
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500">
-                Forgot your password?
-              </a>
-            </div>
+            </div> */}
           </div>
           <button
             type="submit"
-            className="flex rounded-full justify-center w-full h-12px-4 py-2 text-sm font-medium text-white bg-[#14433D] border border-transparent rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="flex rounded-full justify-center w-full  px-4 py-3 text-sm font-medium text-white bg-[#14433D] border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Login
           </button>

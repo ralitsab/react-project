@@ -1,19 +1,22 @@
 import React from 'react';
-;
+import AccountInfo from './account-Info/AccountInfo';
 import { useAuth } from '../../../context/authProvider';
+import styles from "../account.module.css";
 
 export default function Dashboard() {
-  const { currentUser } = useAuth();
-
+  const { currentUser, userProfile } = useAuth();
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="container mx-auto">
-        <h1 className="text-2xl font-bold mb-4">Account Dashboard</h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <AccountInfo currentUser={currentUser} />
-          <Addresses />
-        </div>
-      </div>
+
+    <div className={`${styles.container__account} container__account`}>
+    <div className=" p-8 space-y-6 max-w-2xl m-auto pb-20">
+      <h2 className="antialiased m-0 p-0 font-display text-5xl md:text-6xl text-[#14433D] text-center font-bold">
+    My Account
+      </h2>
+      <p className='text-[#14433D] text-center font-bold text-xl'>{`Welcome back, ${userProfile.firstName}`}</p>
     </div>
+
+    <AccountInfo></AccountInfo>
+  </div>
+
   );
 }
