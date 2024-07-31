@@ -15,6 +15,7 @@ const changeHandler = (e) => {
 
 const submitHandler = (e) => {
     e.preventDefault()
+    setValues(intialValues);
 
 
     submitCallback(values)

@@ -5,6 +5,7 @@ import { db } from "../../firebase.config";
 import { Link } from "react-router-dom";
 import ProductDetailPage from "./product-details/ProductDetails";
 import ProductCardItem from "./product-details/ProductCardItem";
+import CommentSection from "./comment-section/CommentSection";
 
 export default function ProductPage() {
   const {productId} = useParams();
@@ -49,14 +50,15 @@ export default function ProductPage() {
   }, [productId]);
 
   return (
+    <div className="product-page"
+    style={{
+      backgroundColor: selectedProduct.color,
+      transition: "all .5s ease",
+    }}>
     <div
-      className="product-page mx-auto p-10 pt-20 flex"
-      style={{
-        backgroundColor: selectedProduct.color,
-        transition: "all .5s ease",
-      }}
+      className=" mx-auto p-10 pt-20 flex flex-col md:flex-row"
     >
-      <div className="flex-1 pr-10">
+      <div className="flex-1 md:pr-10">
         {selectedProduct ? (
           <ProductDetailPage product={selectedProduct} />
         ) : (
@@ -80,16 +82,19 @@ export default function ProductPage() {
           ))}
         </div>
 
+
         <div className="button-add-to-basket text-center">
-          <Link
+          <button
             to="/register"
             type="button"
             className="border-solid rounded-full font-bold text-lg text-center bg-[#14433D] text-white pt-5 pb-5 pl-10 pr-10 mb-8 transition ease-in-out delay-150 hover:bg-[#14433D] hover:text-white duration-300"
           >
             {`Add to cart  $${selectedProduct.price}`}
-          </Link>
+          </button>
         </div>
       </div>
+    </div>
+    <CommentSection productId={productId}></CommentSection>
     </div>
   );
 }

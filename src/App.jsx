@@ -13,7 +13,6 @@ import AccountDashboard from "./components/account/dashboard/AccountDashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 
 
-
 function App() {
   return (
     <>
@@ -23,10 +22,9 @@ function App() {
       <Route path="/" element={<Home/>} />
       <Route path="/login" element={<LoginForm/>} />
       <Route path="/register" element={<RegisterForm/>} />
-       <Route path="/products/:productId" element={<ProductPage />} />
+      <Route path="/products/:productId" element={<ProductPage />} />
       <Route path="/products" element={<Navigate to="/products/initialProductId" />} />
       <Route path="/account" element={<PrivateRoute Component={AccountDashboard} />} />
-     
       </Routes>
       <Footer />
       </AuthProvider>
