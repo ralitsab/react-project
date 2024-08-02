@@ -6,7 +6,8 @@ export default function ProductCardItem({
   description,
   imageItem,
   color,
-}) {
+})  {
+
   return (
     <Link
       to={`/products/${id}`}
@@ -15,7 +16,10 @@ export default function ProductCardItem({
       <img
         src={imageItem}
         alt={name}
-        className={`w-full h-32 object-contain  bg-[${color}]`}
+        className="w-full h-32 object-contain"  
+         style={{
+          backgroundColor: color,
+        }}
       />
       <div className="p-4 bg-white">
         <h3 className="text-lg font-semibold">{name}</h3>
