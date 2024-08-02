@@ -11,11 +11,12 @@ import RegisterForm from "./components/account/register/RegisterForm";
 import { AuthProvider } from "./context/authProvider";
 import AccountDashboard from "./components/account/dashboard/AccountDashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import SearchResult from "./components/search/SearchResult";
 
 
 function App() {
   return (
-    <>
+    < >
     <AuthProvider>
       <Header></Header>
       <Routes>
@@ -25,6 +26,8 @@ function App() {
       <Route path="/products/:productId" element={<ProductPage />} />
       <Route path="/products" element={<Navigate to="/products/initialProductId" />} />
       <Route path="/account" element={<PrivateRoute Component={AccountDashboard} />} />
+      <Route path="/search/:searchTerm" element={<SearchResult />} />
+
       </Routes>
       <Footer />
       </AuthProvider>

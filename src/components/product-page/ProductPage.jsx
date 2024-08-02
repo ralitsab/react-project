@@ -1,54 +1,19 @@
-import { useState, useEffect } from "react";
+
 import { useParams } from "react-router-dom";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase.config";
-import { Link } from "react-router-dom";
 import ProductDetailPage from "./product-details/ProductDetails";
 import ProductCardItem from "./product-details/ProductCardItem";
 import CommentSection from "./comment-section/CommentSection";
-
+import Loader from "../loader/Loader";
+import { useProduct, useProducts } from "../../hooks/useProducts";
 export default function ProductPage() {
-  const {productId} = useParams();
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState("");
+  const { productId } = useParams();
+  const { products, error: productsError, loading: productsLoading } = useProducts();
+  const { selectedProduct, error: productError, loading: productLoading } = useProduct(productId);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const productsCollectionRef = collection(db, "products");
-        const querySnapshot = await getDocs(productsCollectionRef);
-        const productsList = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setProducts(productsList);
-      } catch (error) {
-        console.error("Error fetching products: ", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-  5;
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      if (productId) {
-        try {
-          const productDocRef = doc(db, "products", productId);
-          const productDoc = await getDoc(productDocRef);
-          if (productDoc.exists()) {
-            setSelectedProduct({ id: productDoc.id, ...productDoc.data() });
-          }
-        } catch (error) {
-          console.error("Error fetching product: ", error);
-        }
-      }
-    };
-
-    fetchProduct();
-  }, [productId]);
-
+if(productLoading) {
+  return <Loader/>
+}
+ 
   return (
     <div className="product-page"
     style={{
@@ -62,7 +27,7 @@ export default function ProductPage() {
         {selectedProduct ? (
           <ProductDetailPage product={selectedProduct} />
         ) : (
-          <p>Loading...</p>
+         <Loader/>
         )}
       </div>
 
