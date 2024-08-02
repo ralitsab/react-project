@@ -1,33 +1,19 @@
 import CommentForm from "./comment-form/CommentForm";
 import styles from "./comment-section.module.css";
 import CommentsList from "./comments-list/CommentsList";
-import { useAuth } from "../../../context/authProvider";
-import { useEffect, useState } from "react";
-import Modal from "./modal/Modal";
-import useCommentForm from "../../../hooks/useComments";
-import { getComments } from "../../../services/commentService";
+import { useAuthProvider } from "../../../context/authProvider";
+import { useState } from "react";
+import Modal from "../../modal/Modal";
+import { useForm } from "../../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
+import { useComments } from "../../../hooks/useComments"
 
 const CommentSection = ({ productId }) => {
   const navigate = useNavigate();
-  const [comments, setComments] = useState([]);
-  const { currentUser, userProfile } = useAuth();
+  const { currentUser,  } = useAuthProvider();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const initialValues = { comment: "", heading: "" };
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const commentsData = await getComments(productId);
-        console.log(commentsData);
-        setComments(commentsData);
-      } catch (err) {
-        console.error("Failed to fetch comments:", err);
-      }
-    };
-
-    fetchComments();
-  }, []);
+  const { comments, addNewComment } = useComments(productId)
 
   const handleOpenModal = () => {
     if (currentUser) {
@@ -36,17 +22,15 @@ const CommentSection = ({ productId }) => {
       navigate("/login");
     }
   };
+  
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  const { values, changeHandler, submitHandler } = useCommentForm(
-    initialValues,
-    productId,
-    currentUser,
-    userProfile,
-    handleCloseModal
-  );
+  const { values, submitHandler, changeHandler } =  useForm(initialValues, (values) => {
+    addNewComment(values.heading, values.comment)
+    setIsModalOpen(false)
+  });
 
   return (
     <div className={styles.commentSection}>
@@ -55,7 +39,7 @@ const CommentSection = ({ productId }) => {
       </h3>
       <button
         onClick={handleOpenModal}
-        className={`border-solid rounded-full font-bold text-lg text-center bg-[#14433D] text-white pt-5 pb-5 pl-10 pr-10 mb-8 transition ease-in-out delay-150 hover:bg-[#14433D] hover:text-white duration-300 ${styles.addReviewButton}`}
+        className={`border-solid rounded-full block m-auto mt-8 mb-8 font-bold text-lg text-center bg-[#14433D] text-white pt-5 pb-5 pl-10 pr-10 transition ease-in-out delay-150 hover:bg-[#14433D] hover:text-white duration-300 ${styles.addReviewButton}`}
       >
         Write a review
       </button>
