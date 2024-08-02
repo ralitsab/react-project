@@ -1,4 +1,4 @@
-// import { useAuth } from '../../../context/authProvider';
+// import { useAuth } from '../../../context/useAuthProvider';
 
 export default function AccountInfo({ currentUser, userProfile }) {
 

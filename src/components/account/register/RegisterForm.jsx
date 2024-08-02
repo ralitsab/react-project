@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import styles from "../account.module.css";
 import { Link } from "react-router-dom";
-import { registerUser } from "../../../services/authService";
-import { validateRegister } from "../../../validation/registerValidation";
 import { useForm } from "../../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
+import Loader from "../../loader/Loader";
+import { useAuthentication } from "../../../hooks/useAuth";
+import { validateRegister } from "../../../utils/validation/registerValidation";
 
 export default function RegisterForm() {
-  const navigate = useNavigate()
-  const [errors, setErrors] = useState({});
+  const { handleRegister, loading } = useAuthentication();
+  const [errors, setErrors] = useState({})
+
 
   const initialValues = {
     email: "",
@@ -18,29 +19,21 @@ export default function RegisterForm() {
     phoneNumber: "",
   };
 
-  const handleRegister = async (values) => {
-    const newErrors = validateRegister(
-      values.email,
-      values.password,
-      values.phoneNumber
-    );
+  const { values, changeHandler, submitHandler } = useForm(initialValues, async (values) => {
+    const newErrors = validateRegister(values.email, values.password, values.phoneNumber);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return;
+    } else {
+      setErrors({});
+      await handleRegister(values);
     }
+  });
 
-    try {
-      await registerUser(values.email, values.password, { firstName: values.firstName, surname: values.surname, phoneNumber: values.phoneNumber });
-      navigate("/account");
-    } catch (error) {
-      setErrors(error.message);
-    }
-  };
 
-  const { values, changeHandler, submitHandler } = useForm(initialValues, handleRegister);
 
   return (
     <div className={`${styles.container__account} container__account`}>
+    {loading && <Loader></Loader>}
     <div className="p-8 space-y-6 max-w-2xl m-auto pb-20">
       <h2 className="antialiased m-0 p-0 font-black font-display text-5xl md:text-6xl text-[#14433D] text-center">
         Create an account

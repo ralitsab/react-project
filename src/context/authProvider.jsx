@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -31,22 +32,13 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const logout = async () => {
-    const auth = getAuth();
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.log("Logout error:", error);
-    }
-  };
-
   return (
-    <AuthContext.Provider value={{ userProfile, currentUser, logout }}>
+    <AuthContext.Provider value={{ userProfile, currentUser, loading }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
+export const useAuthProvider = () => {
   return useContext(AuthContext);
 };

@@ -51,6 +51,7 @@ export const logoutUser = async () => {
   }
 };
 
+
 export const getUserProfile = async (userId) => {
   try {
     const userProfileDoc = doc(db, "users", userId);
@@ -59,7 +60,7 @@ export const getUserProfile = async (userId) => {
       return userProfileSnap.data();
     } else {
       console.log("No such document!");
-      return null;
+      return null; 
     }
   } catch (error) {
     console.error("Error fetching user profile: ", error);
