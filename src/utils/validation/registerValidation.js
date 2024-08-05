@@ -14,7 +14,7 @@
     }
 
     if (!phoneNumber) {
-      errors.phoneNumber = "Phone nummber is required";
+      errors.phoneNumber = "Phone number is required";
     } else if (!/^\d{10}$/.test(phoneNumber)) {
       errors.phoneNumber = "Phone number must be exactly 10 digits long";
     }
