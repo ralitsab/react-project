@@ -2,7 +2,7 @@ export default function CartPage() {
 
       return (
         <div className="container mx-auto p-8 space-y-6 max-w-4xl">
-          <h2 className="antialiased m-0 p-0 font-black font-display text-5xl md:text-6xl text-[#14433D] text-center">
+          <h2 className="antialiased m-0 p-0 font-black font-display text-5xl md:text-6xl text-mainGreen text-center">
             Your Cart
           </h2>
           

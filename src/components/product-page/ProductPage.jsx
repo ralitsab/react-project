@@ -7,7 +7,7 @@ import Loader from "../loader/Loader";
 import { useProduct, useProducts } from "../../hooks/useProducts";
 export default function ProductPage() {
   const { productId } = useParams();
-  const { products, error: productsError, loading: productsLoading } = useProducts();
+  const { products } = useProducts();
   const { selectedProduct, error: productError, loading: productLoading } = useProduct(productId);
 
 if(productLoading) {
@@ -27,17 +27,17 @@ if(productLoading) {
         {selectedProduct ? (
           <ProductDetailPage product={selectedProduct} />
         ) : (
-         <Loader/>
+       <div className="text-center text-red-500">{productError}</div>
         )}
       </div>
 
       <div className="flex-1 mb-10">
         <div className="text-content pb-10">
-          <h1 className="text-[#14433D] font-bold  mb-2 font-display text-4xl font-black md:text-6xl">
+          <h1 className="text-mainGreen font-bold  mb-2 font-display text-4xl font-black md:text-6xl">
             {selectedProduct.name}
           </h1>
-          <p className="mt-2 text-[#14433D]">{selectedProduct.description}</p>
-          <p className="mt-2 text-[#14433D] font-bold text-xl font-black md:text-2xl ">
+          <p className="mt-2 text-mainGreen">{selectedProduct.description}</p>
+          <p className="mt-2 text-mainGreen font-bold text-xl font-black md:text-2xl ">
             ${selectedProduct.price}
           </p>
         </div>
@@ -52,14 +52,14 @@ if(productLoading) {
           <button
             to="/register"
             type="button"
-            className="border-solid rounded-full font-bold text-lg text-center bg-[#14433D] text-white pt-5 pb-5 pl-10 pr-10 mb-8 transition ease-in-out delay-150 hover:bg-[#14433D] hover:text-white duration-300"
+            className="border-solid rounded-full font-bold text-lg text-center bg-mainGreen text-white pt-5 pb-5 pl-10 pr-10 mb-8 transition ease-in-out delay-150 hover:bg-mainGreen hover:text-white duration-300"
           >
             {`Add to cart  $${selectedProduct.price}`}
           </button>
         </div>
       </div>
     </div>
-    <CommentSection productId={productId}></CommentSection>
+    <CommentSection></CommentSection>
     </div>
   );
 }

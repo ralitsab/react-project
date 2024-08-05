@@ -25,7 +25,7 @@ const SearchResults = () => {
         </div>
       ) : (
         <div className="flex justify-center items-center min-h-[600px]">
-            <h1 className="antialiased m-0 p-0 font-black font-display text-5xl md:text-6xl text-[#14433D] text-center">
+            <h1 className="antialiased m-0 p-0 font-black font-display text-5xl md:text-6xl text-mainGreen text-center">
               No products found
             </h1>
           </div>

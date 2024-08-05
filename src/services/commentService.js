@@ -63,7 +63,6 @@ export const deleteUserComment = async (productId, commentId, uid) => {
 
     if (commentSnap.exists() && commentAuthorId === uid) {
       await deleteDoc(commentDoc);
-      console.log('deleted');
     } else {
       throw new Error("You can only delete your own comments.");
     }
