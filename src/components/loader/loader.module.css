@@ -1,0 +1,20 @@
+.can_loader_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    width: 100vw;  /* Full viewport width */
+  }
+  
+  .can_loader {
+    width: 100px; 
+    height: auto;
+    animation: spin 2s linear infinite; 
+  }
+  
+  /* Example of a spin animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  

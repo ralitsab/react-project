@@ -4,7 +4,16 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        mainGreen: "#14433D",
+        lightGreen: "#D3E8E3",
+        pageGreen: "#A7D1C5",
+        hoverLightGreen: "#c8d8d4",
+        darkGreen: "#006954",
+        hoverDarkGreen: "#004d40",
+      },
+    },
   },
   plugins: [],
-}
+};

@@ -1,7 +1,10 @@
-import MainBanner from "./Banners/MainBanner";
+import MainBanner from "./banners/MainBanner";
 
 export default function Home() {
+
   return (
-  <MainBanner></MainBanner>
-  )
+    <div>
+      <MainBanner />
+    </div>
+  );
 }
