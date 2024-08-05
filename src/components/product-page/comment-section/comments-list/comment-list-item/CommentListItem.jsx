@@ -1,49 +1,44 @@
-
 import { useState } from "react";
 
 import styles from "../../comment-section.module.css";
-import { useComments } from "../../../../../hooks/useComments";
+import { useParams } from "react-router-dom";
 
+export default function CommentListItem({ comment, handleDelete}) {
+  const { firstname, surname, createdAt, commentText, heading } = comment;
+  const formattedDate = createdAt
+    ? new Date(createdAt.seconds * 1000).toLocaleDateString()
+    : "";
 
-
-export default function CommentListItem({ comment, productId, currentUser}) {
-    const { firstname, surname, createdAt, commentText, heading } = comment;
-    const formattedDate = createdAt ? new Date(createdAt.seconds * 1000).toLocaleDateString() : "";
-    const { deleteComment } = useComments(productId)
-    
-    const [error, setError] = useState()
-
-    const handleDelete = async () => {
-      try {
-        await deleteComment(comment.id);  
-      } catch (error) {
-        setError('You can only delete your comment.');
-      }
-    };
-  
-    return (
-        <div className={`p-6  ${styles.comment_item}`}>
-          <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-            <div className="user flex flex-col space-y-2 md:mr-4">
-              <span className="text-lg font-bold text-gray-800">{`${firstname} ${surname}`}</span>
-          </div>
-            <div className="content flex flex-col mb-2 md:mb-0">
-              <span className="text-xl font-bold text-[#14433D]">{heading}</span>
-              <p className="text-gray-700">{commentText}</p>
-            </div>
-            <div className="flex flex-col items-end space-y-1">
- 
-              <button
-                onClick={handleDelete}
-                className="text-red-500 hover:text-red-700 focus:outline-none transition ease-in-out delay-150"
-              >
-                &times;
-              </button>
-              <span className="text-sm text-gray-500">{formattedDate}</span>
-            </div>
-          </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-        </div>
-    )
+  const deleteComment = () => {
+    handleDelete(comment.id)
   }
+
+  return (
+    <div className={`p-6 ${styles.comment_item}`}>
+    <div className="flex flex-col md:flex-row md:items-start mb-2">
+   
+      <div className="user flex flex-col space-y-2 md:mr-20 sm:mb-5">
+        <span className="text-lg font-black font-display text-mainGreen">{`${firstname} ${surname}`}</span>
+      </div>
+    
+      <div className="flex flex-col md:flex-row md:items-start flex-1 space-y-2 md:space-y-0 md:space-x-4">
+        <div className="content flex flex-col text-mainGreen flex-1">
+          <span className="text-2xl font-bold pb-2">{heading}</span>
+          <p className="mt-1">{commentText}</p>
+        </div>
+       
+        <div className="flex flex-col items-end space-y-1 md:items-start md:ml-4">
+          <button
+            onClick={deleteComment}
+            className="hover:text-mainGreen text-xl focus:outline-none transition ease-in-out delay-150"
+          >
+            &times;
+          </button>
+          <span className="text-sm text-gray-500">{formattedDate}</span>
+        </div>
+      </div>
+    </div>
+  </div>
   
+  );
+}

@@ -1,23 +1,32 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { addComment, getComments, deleteUserComment } from "../services/commentService";
-import { useAuthProvider } from "../context/authProvider";
+import { useAuthProvider } from "../context/authProvider"
+
 
 export const useComments = (initialProductId) => {
   const [productId, setProductId] = useState(initialProductId);
+  const [error, setError] = useState(null); 
   const [comments, setComments] = useState([]);
   const { currentUser, userProfile } = useAuthProvider();
 
-  const fetchComments = useCallback(async () => {
-    const comments = await getComments(productId);
-    setComments(comments);
-  }, [productId]);
 
+  const fetchComments = async () => {
+    try {
+      const comments = await getComments(productId);
+      setComments(comments);
+    } catch (error) {
+      setError('Failed to fetch comments. Please try again later.');
+    }
+  };
+  
   useEffect(() => {
     fetchComments();
-  }, [fetchComments]);
+  }, [productId]);
+
 
   const addNewComment = async (heading, comment) => {
-    await addComment(
+    try {
+     await addComment(
       productId,
       currentUser.uid,
       userProfile.firstName,
@@ -25,7 +34,10 @@ export const useComments = (initialProductId) => {
       comment,
       heading
     );
-    fetchComments();
+    fetchComments(err);
+  }catch {
+    setError('Failed to add comments. Please try again later.');
+  }
   };
 
   const deleteComment = async (commentId) => {
@@ -33,19 +45,14 @@ export const useComments = (initialProductId) => {
       await deleteUserComment(productId, commentId, currentUser.uid);
       fetchComments();
     } catch (error) {
-      throw error;
+      setError('Failed to delete comment. Please try again later.');
     }
   };
-
-  const updateProductId = (newProductId) => {
-    setProductId(newProductId);
-  };
-
   return {
     comments,
     deleteComment,
     fetchComments,
     addNewComment,
-    updateProductId,
+    error
   };
 };
