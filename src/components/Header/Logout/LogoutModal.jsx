@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './logoutModal.module.css';
 import { logoutUser } from '../../../services/authService';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,3 @@
-import React from 'react';
 import AccountInfo from './account-Info/AccountInfo';
 import { useAuthProvider } from '../../../context/authProvider';
 import styles from "../account.module.css";

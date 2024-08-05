@@ -1,4 +1,3 @@
-import React from 'react';
 import bannerImage from '../../../assets/banners/olipop_pink.png';
 import { Link } from 'react-router-dom';
 
