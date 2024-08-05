@@ -6,7 +6,7 @@ import {
   deleteShippingAddress
 } from "../services/addressSerivce";
 
-export const useAddress = () => {
+export const useAddress = (isEditMode) => {
   const { currentUser } = useAuthProvider();
   const [userAddress, setUserAddress] = useState({});
 
@@ -18,7 +18,7 @@ export const useAddress = () => {
 
   useEffect(() => {
     fetchUserAddresses();
-  }, []);
+  }, [isEditMode]);
 
 
   const addNewAddress = async (address) => {

@@ -21,6 +21,7 @@ function App() {
       <Header></Header>
       <Routes>
       <Route path="/" element={<Home/>} />
+
       <Route path="/login" element={<LoginForm/>} />
       <Route path="/register" element={<RegisterForm/>} />
       <Route path="/products/:productId" element={<ProductPage />} />

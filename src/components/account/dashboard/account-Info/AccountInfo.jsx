@@ -1,8 +1,23 @@
 import { useAuthProvider } from "../../../../context/authProvider";
 import ProfileTab from "./profile-tab/ProfileTab";
+import { logoutUser } from "../../../../services/authService";
 import { useState } from "react";
+
+
 export default function AccountInfo() {
   const [activeTab, setActiveTab] = useState('profile');
+
+
+  
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      logoutUser();
+      navigate("/");
+    } catch (error) {
+    }
+  };
+
 
 
   const renderContent = () => {
@@ -12,9 +27,9 @@ export default function AccountInfo() {
       case 'orderHistory':
         return  'order'
       case 'logout':
-        return "dld"
+        return 
       default:
-        return null;
+        return handleLogout;
     }
   };
 
@@ -46,7 +61,7 @@ export default function AccountInfo() {
             ${activeTab === 'logout' ? 'bg-lightGreen text-mainGreen' : 'bg-darkGreen'} 
             ${activeTab === 'logout' ? 'hover:bg-hoverLightGreen' : 'hover:bg-hoverDarkGreen'} 
             ${activeTab === 'logout' ? 'font-bold' : ''}`}
-          onClick={() => setActiveTab('logout')}
+          onClick={handleLogout}
         >
           Log Out
         </button>
