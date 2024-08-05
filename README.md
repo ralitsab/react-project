@@ -54,8 +54,7 @@ Make sure you have the following installed on your machine:
 ### Commenting
 
 - **Add Comment**: Users can add comments in the relevant sections.
-- **Edit Comment**: Users can edit their existing comments.
-- **Delete Comment**: Users can delete their comments.
+- **Delete Comment**: Users can delete only their comments.
 
 ## Folder Structure
 
@@ -67,6 +66,5 @@ The project follows a standard React folder structure:
   - `services/` - API service functions.
   - `context/` - Context providers and consumers for state management.
   - `utils/` - Utility functions and constants.
-  - `styles/` - Global and component-specific styles.
   - `App.js` - Main application component.
   - `index.js` - Entry point for React application.
