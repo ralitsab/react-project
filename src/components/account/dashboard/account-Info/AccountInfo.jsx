@@ -1,4 +1,3 @@
-import { useAuthProvider } from "../../../../context/authProvider";
 import ProfileTab from "./profile-tab/ProfileTab";
 import { logoutUser } from "../../../../services/authService";
 import { useState } from "react";
