@@ -9,11 +9,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuthProvider } from "../../context/authProvider";
 import LogoutModal from "./logout/LogoutModal";
+import { useCart } from "../../context/cartProvider";
 import SearchForm from "./search/SearchForn";
 
 export default function Header() {
   const { currentUser } = useAuthProvider();
   const [isOpen, setOpen] = useState(false);
+  const { cart } = useCart();
 
   const handleOpen = () => {
     setOpen(true);
@@ -77,17 +79,24 @@ export default function Header() {
           )}
 
           <LogoutModal isOpen={isOpen} onClose={handleClose} />
-
-          <a
-            href="/cart"
-            className="text-gray-700 font-semibold flex items-center"
+          <Link
+            to="/cart"
+            className="relative text-gray-700 font-semibold flex items-center"
           >
             <FontAwesomeIcon
               icon={faBasketShopping}
               className="mr-2 text-mainGreen"
               style={{ height: "20px", width: "20px" }}
             />
-          </a>
+            {cart.length > 0 && (
+              <span
+                className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-hoverDarkGreen rounded-full"
+                style={{ transform: "translate(50%, -50%)" }}
+              >
+                {cart.length}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
     </header>

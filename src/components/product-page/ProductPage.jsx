@@ -5,10 +5,19 @@ import ProductCardItem from "./product-details/ProductCardItem";
 import CommentSection from "./comment-section/CommentSection";
 import Loader from "../loader/Loader";
 import { useProduct, useProducts } from "../../hooks/useProducts";
+import { useCart } from "../../context/cartProvider";
 export default function ProductPage() {
   const { productId } = useParams();
   const { products } = useProducts();
   const { selectedProduct, error: productError, loading: productLoading } = useProduct(productId);
+  const {addToCart} = useCart()
+
+
+  const handleAddToCart = () => {
+    if (selectedProduct) {
+      addToCart(selectedProduct);
+    }
+  };
 
 if(productLoading) {
   return <Loader/>
@@ -50,9 +59,9 @@ if(productLoading) {
 
         <div className="button-add-to-basket text-center">
           <button
-            to="/register"
+           onClick={handleAddToCart}
             type="button"
-            className="border-solid rounded-full font-bold text-lg text-center bg-mainGreen text-white pt-5 pb-5 pl-10 pr-10 mb-8 transition ease-in-out delay-150 hover:bg-mainGreen hover:text-white duration-300"
+            className="border-solid rounded-full font-bold text-lg text-center bg-mainGreen text-white pt-5 pb-5 pl-10 pr-10 mb-8 transition ease-in-out delay-150 hover:bg-hoverDarkGreen duration-300"
           >
             {`Add to cart  $${selectedProduct.price}`}
           </button>

@@ -12,18 +12,22 @@ import { AuthProvider } from "./context/authProvider";
 import AccountDashboard from "./components/account/dashboard/AccountDashboard";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import SearchResult from "./components/search/SearchResult";
+import { CartProvider } from "./context/cartProvider";
+import CartPage from "./components/cart-page/CartPage";
 
 
 function App() {
   return (
     < >
     <AuthProvider>
+      <CartProvider>
       <Header></Header>
       <Routes>
       <Route path="/" element={<Home/>} />
 
       <Route path="/login" element={<LoginForm/>} />
       <Route path="/register" element={<RegisterForm/>} />
+      <Route path="/cart" element={<CartPage/>} />
       <Route path="/products/:productId" element={<ProductPage />} />
       <Route path="/products" element={<Navigate to="/products/initialProductId" />} />
       <Route path="/account" element={<PrivateRoute Component={AccountDashboard} />} />
@@ -31,6 +35,7 @@ function App() {
 
       </Routes>
       <Footer />
+      </CartProvider>
       </AuthProvider>
     </>    
 );

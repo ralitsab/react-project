@@ -11,7 +11,7 @@ export default function ProductCardItem({
   return (
     <Link
       to={`/products/${id}`}
-      className="border rounded-lg overflow-hidden block"
+      className="border rounded-lg overflow-hidden h-full block"
     >
       <img
         src={imageItem}
@@ -21,7 +21,7 @@ export default function ProductCardItem({
           backgroundColor: color,
         }}
       />
-      <div className="p-4 bg-white">
+      <div className="p-4 bg-white h-full">
         <h3 className="text-lg font-semibold">{name}</h3>
         <p className="text-gray-600">{description}</p>
       </div>

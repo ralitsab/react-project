@@ -7,6 +7,7 @@
 - **Profile Dashboard**: A profile page where users can view and update their address information.
 - **Search Functionality**: Users can search for products by productId or productName.
 - **Commenting**: Users can add and delete comments on Product Page.
+- **Cart Functionality**- Users can add products to cart and place an order.
 
 ## Getting Started
 
@@ -55,6 +56,12 @@ Make sure you have the following installed on your machine:
 
 - **Add Comment**: Users can add comments in the relevant sections.
 - **Delete Comment**: Users can delete only their comments.
+
+### Cart Functionality
+- **Add To Cart**: Users can add products to cart.
+- **Delete Cart Products**: Users can delete products from the cart.
+- **Place Order**: Users can place an order.
+
 
 ## Folder Structure
 
