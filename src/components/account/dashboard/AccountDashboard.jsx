@@ -6,9 +6,6 @@ import Loader from '../../loader/Loader';
 export default function AccountDashboard() {
   const { userProfile } = useAuthProvider();
 
-  if(!userProfile) {
-    return <Loader></Loader>
-  }
 
   return (
     <div className={`${styles.container__account} container__account`}>
