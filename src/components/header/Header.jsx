@@ -14,15 +14,15 @@ import SearchForm from "./search/SearchForm";
 
 export default function Header() {
   const { currentUser } = useAuthProvider();
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { cart } = useCart();
 
   const handleOpen = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   return (
