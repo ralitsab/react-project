@@ -1,10 +1,7 @@
 import { useForm } from "../../../../../hooks/useForm";
-import { useAddress } from "../../../../../hooks/useAddress";
 import { validateAddressForm } from "../../../../../utils/validation/addressValidation";
-import Loader from "../../../../loader/Loader";
 
 const AddressForm = ({ isEditMode, setIsEditMode, onAddAddress }) => {
-  const { loading } = useAddress();
 
   const initialValues = {
     firstname: "",
@@ -30,10 +27,6 @@ const AddressForm = ({ isEditMode, setIsEditMode, onAddAddress }) => {
     },
     validateAddressForm
   );
-
-  if (loading) {
-    return <Loader></Loader>;
-  }
 
   return (
     <form className="space-y-6" onSubmit={submitHandler}>

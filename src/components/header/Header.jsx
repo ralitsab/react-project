@@ -8,9 +8,9 @@ import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuthProvider } from "../../context/authProvider";
-import LogoutModal from "../Logout/LogoutModal";
 import { useCart } from "../../context/cartProvider";
 import SearchForm from "./search/SearchForm";
+import LogoutModal from "./logout/LogoutModal";
 
 export default function Header() {
   const { currentUser } = useAuthProvider();

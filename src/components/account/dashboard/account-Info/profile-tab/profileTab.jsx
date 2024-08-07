@@ -2,11 +2,10 @@ import { useAuthProvider } from "../../../../../context/authProvider";
 import AddressForm from "./AddressForm";
 import { useState } from "react";
 import { useAddress } from "../../../../../hooks/useAddress";
-import Loader from "../../../../loader/Loader";
 export default function ProfileTab() {
   const [isEditMode, setIsEditMode] = useState(false);
   const { userProfile } = useAuthProvider();
-  const { userAddress, addNewAddress, removeAddress, loading } = useAddress();
+  const { userAddress, addNewAddress, removeAddress } = useAddress();
 
   console.log(userAddress);
   const handleAddAddress = (address) => {
@@ -21,9 +20,6 @@ export default function ProfileTab() {
     removeAddress();
   };
 
-  if (loading) {
-    return <Loader />;
-  }
   return (
     <div className="profile tab flex flex-col lg:flex-row gap-6 p-6">
       <div className="account-details flex-1">
