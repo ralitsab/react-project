@@ -21,12 +21,14 @@ export const registerUser = async (email, password, additionalData) => {
       email: user.email,
       ...additionalData,
     });
+
     return user;
   } catch (error) {
-    console.log("error");
+    console.error("Error registering user:", error);
   }
 };
 
+// Log in a user
 export const loginUser = async (email, password) => {
   const auth = getAuth();
   try {
@@ -35,35 +37,38 @@ export const loginUser = async (email, password) => {
       email,
       password
     );
+
     return userCredential.user;
   } catch (error) {
-    throw error;
+    console.error("Error logging in user:", error);
+    throw new Error("The credentials provided are invalid.");
   }
 };
 
-// Logout user
+// Log out the current user
 export const logoutUser = async () => {
   const auth = getAuth();
   try {
     await signOut(auth);
   } catch (error) {
-    throw error;
+    console.error("Error logging out user:", error);
+    throw new Error("An unexpected error occurred during logout.");
   }
 };
-
 
 export const getUserProfile = async (userId) => {
   try {
     const userProfileDoc = doc(db, "users", userId);
     const userProfileSnap = await getDoc(userProfileDoc);
+
     if (userProfileSnap.exists()) {
       return userProfileSnap.data();
     } else {
-      console.log("No such document!");
-      return null; 
+      console.warn("No such document!");
+      return null;
     }
   } catch (error) {
-    console.error("Error fetching user profile: ", error);
-    throw error;
+    console.error("Error fetching user profile:", error);
+    throw new Error("An unexpected error occurred while fetching user profile.");
   }
 };
