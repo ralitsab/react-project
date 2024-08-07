@@ -6,11 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const CartContext = createContext();
 export function CartProvider({ children }) {
 const navigate = useNavigate();
-const { currentUser } = useAuthProvider();
   const [cart, setCart] = useState([]);
   const [errors, setErrors] = useState([])
-
-
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -27,13 +24,14 @@ const { currentUser } = useAuthProvider();
 
 const placeOrder = async (currentUser) => {
     try {
-        if(currentUser) {
+      if(currentUser ) {
         await addOrder(
             cart,
             currentUser.uid
           );
         localStorage.removeItem('cart');
         setCart([])  
+       
         }else {
             navigate("/login")
         }

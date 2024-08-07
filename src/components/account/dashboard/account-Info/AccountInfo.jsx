@@ -1,6 +1,7 @@
 import ProfileTab from "./profile-tab/ProfileTab";
 import { logoutUser } from "../../../../services/authService";
 import { useState } from "react";
+import OrderHistory from "./order-history-tab/OrderHistory";
 
 
 export default function AccountInfo() {
@@ -24,7 +25,7 @@ export default function AccountInfo() {
       case 'profile':
         return <ProfileTab />;
       case 'orderHistory':
-        return  'order'
+        return  <OrderHistory/>
       case 'logout':
         return 
       default:

@@ -8,6 +8,7 @@
 - **Search Functionality**: Users can search for products by productId or productName.
 - **Commenting**: Users can add and delete comments on the Product Page.
 - **Cart Functionality**: Users can add products to the cart and place an order.
+- **Order History**: Users can view their past orders and details.
 
 ## Getting Started
 
@@ -65,6 +66,10 @@ Make sure you have the following installed on your machine:
 - **Delete Cart Products**: Users can delete products from the cart.
 - **Place Order**: Users can place an order.
 
+### Order History
+
+- **View Orders**: Authenticated users can view their past orders, including order details and items.
+
 ## Access and Functionality
 
 ### Authenticated Users
@@ -77,6 +82,7 @@ Authenticated users (logged in) can:
 - **Remove Products from Cart**: Remove products from their cart.
 - **Place Orders**: Place orders for products in their cart.
 - **Commenting**: Add and delete their own comments on product pages.
+- **View Orders**: View their order history, including details and items.
 
 ### Non-Authenticated Users
 

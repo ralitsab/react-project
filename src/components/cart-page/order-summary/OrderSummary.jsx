@@ -15,6 +15,7 @@ export default function OrderSummary() {
         </div>
         <button
           onClick={() => placeOrder(currentUser)}
+          disabled={cart.length === 0}
           className="w-full bg-mainGreen text-white font-bold py-2 px-4 rounded-lg hover:bg-hoverDarkGreen transition"
         >
           Submit Order
