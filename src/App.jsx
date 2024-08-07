@@ -14,6 +14,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import SearchResult from "./components/search/SearchResult";
 import { CartProvider } from "./context/cartProvider";
 import CartPage from "./components/cart-page/CartPage";
+import RedirectAuthenticatedRoute from "./components/redirect-authenticated-route/RedirectAuthenticatedRoute";
 
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
       <Routes>
       <Route path="/" element={<Home/>} />
 
-      <Route path="/login" element={<LoginForm/>} />
-      <Route path="/register" element={<RegisterForm/>} />
+      <Route path="/login" element={<RedirectAuthenticatedRoute Component={LoginForm}/>} />
+      <Route path="/register" element={<RedirectAuthenticatedRoute Component={RegisterForm}/>} />
       <Route path="/cart" element={<CartPage/>} />
       <Route path="/products/:productId" element={<ProductPage />} />
       <Route path="/products" element={<Navigate to="/products/initialProductId" />} />
